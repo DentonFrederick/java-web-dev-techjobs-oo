@@ -6,26 +6,38 @@ import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
 
 public class JobTest {
-    private Job job;
+    private Job sampleJob;
+    private Job job1;
+    private Job job2;
+    private Job testJob1;
+    private Job testJob2;
+
 
     @Before
     public void makeJob(){
-        job = new Job( "Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        job1 = new Job();
+        job2 = new Job();
+        sampleJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
     }
 
     @Test
     public void testSettingJobId(){
-        Job job1 = new Job();
-        Job job2 = new Job();
-        Assert.assertTrue(job1.getId() == job2.getId());
+        Assert.assertEquals(job1.getId(), job2.getId(), 1);
     }
     @Test
     public void testJobConstructorSetsAllFields(){
-        Assert.assertEquals("Product tester", this.job.getName());
-        Assert.assertEquals("ACME", this.job.getEmployer());
-        Assert.assertEquals("Desert", this.job.getLocation());
-        Assert.assertEquals("Quality control", this.job.getPositionType());
-        Assert.assertEquals("Persistence", this.job.getCoreCompetency());
+        Assert.assertTrue(sampleJob instanceof Job);
+        Assert.assertEquals("Product tester", this.sampleJob.getName());
+        Assert.assertTrue(this.sampleJob.getEmployer() != null);
+        Assert.assertTrue(this.sampleJob.getLocation() != null);
+        Assert.assertTrue(this.sampleJob.getPositionType() != null);
+        Assert.assertTrue(this.sampleJob.getCoreCompetency() != null);
+    }
+    @Test
+    public void testJobsForEquality(){
+        Assert.assertTrue(testJob1.getId() == testJob2.getId());
     }
 
 }
