@@ -12,6 +12,7 @@ public class JobTest {
     private Job testJob1;
     private Job testJob2;
     private Job emptyFields;
+    private Job idOnly;
 
 
     @Before
@@ -21,13 +22,16 @@ public class JobTest {
         sampleJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        emptyFields = new Job("Product tester", new Employer(), new Location(), new PositionType(), new CoreCompetency());
+        emptyFields = new Job("Product tester", new Employer("ACME"), new Location(""), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        idOnly = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
     }
 
     @Test
     public void testSettingJobId() {
+        int idDifference = job2.getId() - job1.getId();
 
-        Assert.assertEquals(job1.getId(), job2.getId(), 1);
+        Assert.assertFalse(job1.getId() == job2.getId());
+        Assert.assertTrue(idDifference == 1);
     }
 
     @Test
@@ -64,12 +68,12 @@ public class JobTest {
     }
     @Test
     public void testNoEmptyFields(){
-        Assert.assertTrue(emptyFields.toString().contains("Data not available"));
+        Assert.assertTrue(emptyFields.toString().contains("Location: Data not available"));
     }
     @Test
     public void testIdOnly(){
         String testingString = "No jobs exist";
-        Assert.assertEquals(testingString, emptyFields.toString());
+        Assert.assertEquals(testingString, idOnly.toString());
     }
 
 }
