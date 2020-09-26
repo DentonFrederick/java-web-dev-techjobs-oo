@@ -21,7 +21,7 @@ public class JobTest {
         sampleJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        emptyFields = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+        emptyFields = new Job("Product tester", new Employer(), new Location(), new PositionType(), new CoreCompetency());
     }
 
     @Test
@@ -64,13 +64,7 @@ public class JobTest {
     }
     @Test
     public void testNoEmptyFields(){
-        String testingString = "\nID: " + emptyFields.getId() +
-                "\nName: " + "Data not available" +
-                "\nEmployer: " + "Data not available" +
-                "\nLocation: " + "Data not available" +
-                "\nPosition Type: " + "Data not available" +
-                "\n";
-        Assert.assertEquals(testingString, emptyFields.toString());
+        Assert.assertTrue(emptyFields.toString().contains("Data not available"));
     }
     @Test
     public void testIdOnly(){
